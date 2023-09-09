@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.RuleEngine", "src\CongestionTax.RuleEngine\CongestionTax.RuleEngine.csproj", "{A48AC9F1-2701-4881-944E-78D5AE9D6761}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4670EE31-085D-4496-AEF9-6806E5706A59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.Test", "test\CongestionTax.Test\CongestionTax.Test.csproj", "{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B} = {4670EE31-085D-4496-AEF9-6806E5706A59}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {676CFD3B-3181-49A2-BEA1-4395B6A71CDA}
+	EndGlobalSection
+EndGlobal
