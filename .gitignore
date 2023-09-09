@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/CongestionTax.RuleEngine/bin/Debug/net6.0
+/src/CongestionTax.RuleEngine/obj
+/test/CongestionTax.Test/bin/Debug/net6.0
+/test/CongestionTax.Test/obj
