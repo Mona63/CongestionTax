@@ -1,20 +1,14 @@
 ﻿namespace CongestionTax.RuleEngine
 {
-    public class VehichleTypeRule : ITaxFreeRule
+    public class VehichleTypeRule : IFreeChargeRule
     {
         public int Proiority { get; set; }
        
-        public  bool IsApplicable(Travel travel)
+        public  bool CanBeFreeCharge(Travel travel)
         {
-            var result= IsTaxFreeVehicle(travel.VehicleType);    
+            var result = Enum.IsDefined(typeof(FreeChargeVehicleType), travel.VehicleType.ToString());
             return result;
         }
        
-        private bool IsTaxFreeVehicle(VehicleType vehicleType)
-        {
-            var result= Enum.IsDefined(typeof(FreeTaxVehicleType), vehicleType.ToString());   
-            return result;
-        }
-
     }
 }

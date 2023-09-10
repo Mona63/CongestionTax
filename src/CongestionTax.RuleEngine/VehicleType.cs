@@ -16,7 +16,7 @@ namespace CongestionTax.RuleEngine
         Military = 5,
         Others = 6
     }
-    public enum FreeTaxVehicleType
+    public enum FreeChargeVehicleType
     {
         Motorcycle = 0,
         Tractor = 1,
