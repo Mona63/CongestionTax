@@ -1,25 +1,31 @@
 ﻿using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CongestionTax.RuleEngine
 {
     public class RuleEngine
     {
-        List<CongestionTaxBaseRule> _rules = new();
+        List<ITaxFreeRule> _taxFreeRules = new();
+        List<ITaxCaculationRule> _taxCalculationRules = new();
 
-        public RuleEngine(IEnumerable<CongestionTaxBaseRule?> rules)
+        public RuleEngine(IEnumerable<ITaxFreeRule?> taxFreeRules
+                         ,IEnumerable<ITaxCaculationRule?> taxCalculationRules)
         {
-            _rules.AddRange(rules);
+            _taxFreeRules.AddRange(taxFreeRules);
+            _taxCalculationRules.AddRange(taxCalculationRules);
         }
 
-        public decimal GetCongestionTaxFee(Travel travel)
+        public decimal GetCongestionTaxAmount(Travel travel)
         {
-            decimal taxFee = 0;
-            var applicapleRule = _rules.OrderBy(r => r.Proiority)
-                                        .FirstOrDefault(r => r.IsApplicable(travel));
+            decimal taxAmount = 0;
+            var taxFreeRule = _taxFreeRules.OrderBy(r => r.Proiority)
+                                           .FirstOrDefault(r => r.IsApplicable(travel));
 
-            if (applicapleRule != null) { taxFee = applicapleRule.GetTaxFee(); }
+            if (taxFreeRule != null) { return 0; }
 
-            return taxFee;
+            taxAmount = _taxCalculationRules.Aggregate(0m,(current, r) => Math.Max(current,r.GetTaxAmount(travel,current)));
+           
+            return taxAmount;
         }
     }
 }

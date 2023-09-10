@@ -1,30 +1,21 @@
 ﻿namespace CongestionTax.RuleEngine
 {
-    public class CalendarRule : CongestionTaxBaseRule
+    public class CalendarRule : ITaxFreeRule
     {
-        public CalendarRule(int proiority)
+        public int Proiority { get; set; }
+        public  bool IsApplicable(Travel travel)
         {
-            Proiority = proiority;
-        }
-        public override bool IsApplicable(Travel travel)
-        {
-            if (IsTaxFreeDays(travel.ActionAt)) return true;
-            return false;
+            var result = IsTaxFreeDay(travel.ActionAt);
+            return result;
         }
 
-        public override decimal GetTaxFee()
+        private bool IsTaxFreeDay(DateTime dt)
         {
-            return 0;
-        }
-
-        private bool IsTaxFreeDays(DateTime dt)
-        {
-            if (dt.IsWeekend() ||
-                dt.IsPublicHoliday() ||
-                dt.IsDayBeforePublicHoliday()||
-                dt.IsJuly())
-                return true;
-            return false;
+            var result = (dt.IsWeekend() ||
+                          dt.IsPublicHoliday() ||
+                          dt.IsDayBeforePublicHoliday() ||
+                          dt.IsJuly());
+            return result;
         }
     }
 }
