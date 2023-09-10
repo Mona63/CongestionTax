@@ -5,27 +5,27 @@ namespace CongestionTax.RuleEngine
 {
     public class RuleEngine
     {
-        List<ITaxFreeRule> _taxFreeRules = new();
-        List<ITaxCaculationRule> _taxCalculationRules = new();
+        readonly List<IFreeChargeRule> _freeChargeRules = new();
+        readonly List<ICaculationTollRule> _caculationTollRules = new();
 
-        public RuleEngine(IEnumerable<ITaxFreeRule?> taxFreeRules
-                         ,IEnumerable<ITaxCaculationRule?> taxCalculationRules)
+        public RuleEngine(IEnumerable<IFreeChargeRule?> freeChargeRules
+                         , IEnumerable<ICaculationTollRule?> caculationTollRules)
         {
-            _taxFreeRules.AddRange(taxFreeRules);
-            _taxCalculationRules.AddRange(taxCalculationRules);
+            _freeChargeRules.AddRange(freeChargeRules);
+            _caculationTollRules.AddRange(caculationTollRules);
         }
 
-        public decimal GetCongestionTaxAmount(Travel travel)
+        public decimal GetToll(Travel travel)
         {
-            decimal taxAmount = 0;
-            var taxFreeRule = _taxFreeRules.OrderBy(r => r.Proiority)
-                                           .FirstOrDefault(r => r.IsApplicable(travel));
+            decimal toll = 0;
+            var freeChargeRule = _freeChargeRules.OrderBy(r => r.Proiority)
+                                                 .FirstOrDefault(r => r.CanBeFreeCharge(travel));
 
-            if (taxFreeRule != null) { return 0; }
+            if (freeChargeRule != null) { return 0; }
 
-            taxAmount = _taxCalculationRules.Aggregate(0m,(current, r) => Math.Max(current,r.GetTaxAmount(travel,current)));
+            toll = _caculationTollRules.Aggregate(0m, (total, rule) => (rule.CalculationToll(travel)) + total);
            
-            return taxAmount;
+            return toll;
         }
     }
 }
