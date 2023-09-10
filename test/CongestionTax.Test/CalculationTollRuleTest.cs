@@ -1,3 +1,4 @@
+using CongestionTax.Core;
 using CongestionTax.RuleEngine;
 using FluentAssertions;
 

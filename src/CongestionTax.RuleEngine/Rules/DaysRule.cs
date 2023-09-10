@@ -1,4 +1,6 @@
-﻿namespace CongestionTax.RuleEngine
+﻿using CongestionTax.Core;
+
+namespace CongestionTax.RuleEngine
 {
     public class DaysRule : IFreeChargeRule
     {

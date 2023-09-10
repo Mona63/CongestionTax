@@ -1,4 +1,4 @@
-﻿namespace CongestionTax.RuleEngine
+﻿namespace CongestionTax.Core
 {
     public class Travel
     {
@@ -6,6 +6,6 @@
         public DateTime ActionAt { get; set; }
         public int VehicleId { get; set; }
         public VehicleType VehicleType { get; set; }
-
+        public decimal Toll { get; set; }
     }
 }

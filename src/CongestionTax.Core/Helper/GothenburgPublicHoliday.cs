@@ -1,4 +1,4 @@
-﻿namespace CongestionTax.RuleEngine
+﻿namespace CongestionTax.Core
 {
     public static class GothenburgPublicHoliday
     {

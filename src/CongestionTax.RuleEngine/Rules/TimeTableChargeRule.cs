@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CongestionTax.Core;
+using System;
 
 namespace CongestionTax.RuleEngine
 {

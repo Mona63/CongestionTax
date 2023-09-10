@@ -7,3 +7,7 @@
 /src/CongestionTax.RuleEngine/obj
 /test/CongestionTax.Test/bin/Debug/net6.0
 /test/CongestionTax.Test/obj
+/src/CongestionTax.Core/bin/Debug/net6.0
+/src/CongestionTax.Core/obj
+/src/CongestionTax.Infrastructure/bin/Debug/net6.0
+/src/CongestionTax.Infrastructure/obj

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using CongestionTax.Core;
+using System.Data;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CongestionTax.RuleEngine

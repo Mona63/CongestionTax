@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CongestionTax.RuleEngine
+namespace CongestionTax.Core
 {
     public static class DateTimeExtention
     {

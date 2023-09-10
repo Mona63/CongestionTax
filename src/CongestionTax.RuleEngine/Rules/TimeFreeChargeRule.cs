@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using CongestionTax.Core;
+using System.Reflection.Metadata;
 
 namespace CongestionTax.RuleEngine
 {
