@@ -9,13 +9,13 @@ namespace CongestionTax.RuleEngine
 {
     public static class DateTimeExtention
     {
-        public static bool IsWeekend(this DateTime value)
+        public static bool IsWeekend(this DateTime dt)
         {
-            return (value.DayOfWeek == DayOfWeek.Sunday || value.DayOfWeek == DayOfWeek.Saturday);
+            return (dt.DayOfWeek == DayOfWeek.Sunday || dt.DayOfWeek == DayOfWeek.Saturday);
         }
-        public static bool IsJuly(this DateTime value)
+        public static bool IsJuly(this DateTime dt)
         {
-            return (value.Month == 7);
+            return (dt.Month == 7);
         }
         public static bool IsPublicHoliday(this DateTime dt)
         {
@@ -67,6 +67,11 @@ namespace CongestionTax.RuleEngine
         }
         public static bool IsDayBeforePublicHoliday(this DateTime dt)
         { return dt.AddDays(-1).IsPublicHoliday(); }
+        public static bool IsBetweenTime(this DateTime dt, TimeSpan startTime, TimeSpan endTime)
+        {
+            TimeSpan now = dt.TimeOfDay;
+            return startTime <= now || now <= endTime;
+        }
 
     }
 }
