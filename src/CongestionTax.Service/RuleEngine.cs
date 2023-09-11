@@ -1,22 +1,22 @@
 ﻿using CongestionTax.Core;
+using CongestionTax.Core.Dtos;
 using System.Data;
-using System.Diagnostics.CodeAnalysis;
 
-namespace CongestionTax.RuleEngine
+namespace CongestionTax.Service
 {
-    public class RuleEngine
+    public class RuleEngine: IRuleEngine
     {
-        readonly List<IFreeChargeRule> _freeChargeRules = new();
-        readonly List<ICaculationTollRule> _caculationTollRules = new();
+        readonly IEnumerable<IFreeChargeRule> _freeChargeRules;
+        readonly IEnumerable<ICaculationTollRule> _caculationTollRules;
 
         public RuleEngine(IEnumerable<IFreeChargeRule?> freeChargeRules
                          , IEnumerable<ICaculationTollRule?> caculationTollRules)
         {
-            _freeChargeRules.AddRange(freeChargeRules);
-            _caculationTollRules.AddRange(caculationTollRules);
-        }
+            _freeChargeRules=freeChargeRules;
+            _caculationTollRules = caculationTollRules;
+        }   
 
-        public decimal GetToll(Travel travel)
+        public decimal GetTollAmount(TravelDto travel)
         {
             decimal toll = 0;
             var freeChargeRule = _freeChargeRules.OrderBy(r => r.Proiority)

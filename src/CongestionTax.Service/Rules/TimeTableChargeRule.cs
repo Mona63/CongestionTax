@@ -1,7 +1,7 @@
 ﻿using CongestionTax.Core;
-using System;
+using CongestionTax.Core.Dtos;
 
-namespace CongestionTax.RuleEngine
+namespace CongestionTax.Service
 {
     public class TimeTableChargeRule : ICaculationTollRule
     {
@@ -20,7 +20,7 @@ namespace CongestionTax.RuleEngine
                                                   
         };
 
-        public decimal CalculationToll(Travel travel)
+        public decimal CalculationToll(TravelDto travel)
         {
             var result = _timeTable.FirstOrDefault(t => t.FromTime <= travel.ActionAt.TimeOfDay
                                                     && t.ToTime >= travel.ActionAt.TimeOfDay

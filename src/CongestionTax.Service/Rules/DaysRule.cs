@@ -1,11 +1,12 @@
 ﻿using CongestionTax.Core;
+using CongestionTax.Core.Dtos;
 
-namespace CongestionTax.RuleEngine
+namespace CongestionTax.Service
 {
     public class DaysRule : IFreeChargeRule
     {
         public int Proiority { get; set; }
-        public  bool CanBeFreeCharge(Travel travel)
+        public  bool CanBeFreeCharge(TravelDto travel)
         {
             var result = (travel.ActionAt.IsWeekend() ||
                            travel.ActionAt.IsPublicHoliday() ||
@@ -13,5 +14,6 @@ namespace CongestionTax.RuleEngine
                            travel.ActionAt.IsJuly());
             return result;
         }
+
     }
 }
