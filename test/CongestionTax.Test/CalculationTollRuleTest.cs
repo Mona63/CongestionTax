@@ -1,5 +1,6 @@
 using CongestionTax.Core;
-using CongestionTax.RuleEngine;
+using CongestionTax.Core.Dtos;
+using CongestionTax.Service;
 using FluentAssertions;
 
 namespace CongestionTax.Test
@@ -13,7 +14,7 @@ namespace CongestionTax.Test
         public void It_should_be_charge_according_time_table_charge(DateTime actionAt, decimal toll)
         {
             // arrange
-            var travelToProcess = new Travel { Id = 1, VehicleId = 1, VehicleType = VehicleType.Others, ActionAt = actionAt };
+            var travelToProcess = new TravelDto { VehicleType = VehicleType.Others , ActionAt = actionAt };
             var timeTableChargeRule = new TimeTableChargeRule();
 
             // act

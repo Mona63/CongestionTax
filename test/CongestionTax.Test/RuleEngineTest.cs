@@ -1,16 +1,11 @@
 ﻿using CongestionTax.Core;
-using CongestionTax.RuleEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CongestionTax.Service;
 
 namespace CongestionTax.Test
 {
     public class RuleEngineTest
     {
-        private RuleEngine.RuleEngine _ruleEngine;
+        private RuleEngine _ruleEngine;
 
         [SetUp]
         public void Setup()
@@ -24,7 +19,7 @@ namespace CongestionTax.Test
             var CalculationRules = new List<ICaculationTollRule> { 
                                           new TimeTableChargeRule()
                     };
-            _ruleEngine = new RuleEngine.RuleEngine(freeChargeRules, CalculationRules);
+            _ruleEngine = new RuleEngine(freeChargeRules, CalculationRules);
         }
     }
 }

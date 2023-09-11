@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\CongestionTax.RuleEngine\CongestionTax.RuleEngine.csproj" />
+    <ProjectReference Include="..\..\src\CongestionTax.Service\CongestionTax.Service.csproj" />
   </ItemGroup>
 
 </Project>
