@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.RuleEngine", "src\CongestionTax.RuleEngine\CongestionTax.RuleEngine.csproj", "{A48AC9F1-2701-4881-944E-78D5AE9D6761}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4670EE31-085D-4496-AEF9-6806E5706A59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.Test", "test\CongestionTax.Test\CongestionTax.Test.csproj", "{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.Infrastructure", "src\CongestionTax.Infrastructure\CongestionTax.Infrastructure.csproj", "{D79EA565-5F87-45E7-8BE3-BEB87497F35D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTax.Core", "src\CongestionTax.Core\CongestionTax.Core.csproj", "{6FEA4193-63D7-4E9A-A4A9-4F5457D02A6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.Core", "src\CongestionTax.Core\CongestionTax.Core.csproj", "{6FEA4193-63D7-4E9A-A4A9-4F5457D02A6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.Service", "src\CongestionTax.Service\CongestionTax.Service.csproj", "{EAD56BA1-FF41-4363-B2B2-97AD0ED642DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTax.API", "src\CongestionTax.API\CongestionTax.API.csproj", "{3EF3848B-2DAD-4554-948C-73E2E3502FDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTax.Scheduling", "src\CongestionTax.Scheduling\CongestionTax.Scheduling.csproj", "{E0F3D697-1F58-44FC-ABFE-1C58EE837FC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A48AC9F1-2701-4881-944E-78D5AE9D6761}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFEAA3F-4C3F-498D-8C64-B2CA3FCD447B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +35,18 @@ Global
 		{6FEA4193-63D7-4E9A-A4A9-4F5457D02A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEA4193-63D7-4E9A-A4A9-4F5457D02A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEA4193-63D7-4E9A-A4A9-4F5457D02A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD56BA1-FF41-4363-B2B2-97AD0ED642DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD56BA1-FF41-4363-B2B2-97AD0ED642DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD56BA1-FF41-4363-B2B2-97AD0ED642DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD56BA1-FF41-4363-B2B2-97AD0ED642DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF3848B-2DAD-4554-948C-73E2E3502FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF3848B-2DAD-4554-948C-73E2E3502FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF3848B-2DAD-4554-948C-73E2E3502FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF3848B-2DAD-4554-948C-73E2E3502FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F3D697-1F58-44FC-ABFE-1C58EE837FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F3D697-1F58-44FC-ABFE-1C58EE837FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F3D697-1F58-44FC-ABFE-1C58EE837FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F3D697-1F58-44FC-ABFE-1C58EE837FC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
