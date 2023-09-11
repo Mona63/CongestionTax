@@ -11,3 +11,11 @@
 /src/CongestionTax.Core/obj
 /src/CongestionTax.Infrastructure/bin/Debug/net6.0
 /src/CongestionTax.Infrastructure/obj
+/obj
+/src/CongestionTax.API/bin/Debug/net6.0
+/src/CongestionTax.API/obj
+/src/CongestionTax.Scheduling/bin/Debug/net6.0
+/src/CongestionTax.Scheduling/obj
+/src/CongestionTax.Service/bin/Debug/net6.0
+/src/CongestionTax.Service/obj
+/src/obj
