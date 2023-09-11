@@ -7,19 +7,19 @@ namespace CongestionTax.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TravelController : ControllerBase
+    public class TollController : ControllerBase
     {
        
         private readonly ITravelService _travelService;
 
-        public TravelController(ITravelService travelService)
+        public TollController(ITravelService travelService)
         {
             _travelService = travelService;
         }
 
         // POST: travels
         [HttpPost]
-        public async Task<IActionResult> ChargeTravel(TravelDto travel)
+        public async Task<IActionResult> Register(TravelDto travel)
         {
             try
             {
