@@ -1,12 +1,13 @@
-﻿using CongestionTax.Core;
+﻿using CongestionTax.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CongestionTax.Infrastructure
 {
     public class CongestionTaxDbContext : DbContext
     {
-        public DbSet<Travel> Travels { get; set; }
-        
+        public DbSet<Toll> Tolls { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+       
         public CongestionTaxDbContext()
         {
         }
