@@ -12,7 +12,7 @@ namespace CongestionTax.Scheduling
         private int executionCount = 0;
         private readonly ILogger<DailyHostedService> _logger;
         private Timer? _timer = null;
-        private readonly HitDailyMaxChargeRule _hitDailyMaxChargeRule;
+        private readonly DailyMaxChargeRule _hitDailyMaxChargeRule;
 
         public DailyHostedService(ILogger<DailyHostedService> logger)
         {
@@ -33,7 +33,7 @@ namespace CongestionTax.Scheduling
         {
             var count = Interlocked.Increment(ref executionCount);
 
-            _hitDailyMaxChargeRule.UpdateTollsAfterHitDailyMaxAsync(DateTime.Now.AddDays(-1));
+            _hitDailyMaxChargeRule.ApplyDailyMaxChargeRuleAsync(DateTime.Now.AddDays(-1));
 
             _logger.LogInformation(
                 "Timed Hosted Service is working. Count: {Count}", count);
