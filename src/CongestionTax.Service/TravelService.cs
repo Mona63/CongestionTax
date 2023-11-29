@@ -2,18 +2,18 @@
 using CongestionTax.Core.Dtos;
 using CongestionTax.Core.Entities;
 using CongestionTax.Core.Service;
-using System.Diagnostics;
 
 namespace CongestionTax.Service
 {
     public class TravelService : ITravelService
     {
-
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ITollRepository _tollRepository;
         private readonly IRuleEngine _ruleEngine;
 
-        public TravelService(ITollRepository tollRepository, IRuleEngine ruleEngine)
+        public TravelService(IUnitOfWork unitOfWork, ITollRepository tollRepository, IRuleEngine ruleEngine)
         {
+            _unitOfWork = unitOfWork;
             _tollRepository = tollRepository;
             _ruleEngine = ruleEngine;
         }
@@ -28,9 +28,10 @@ namespace CongestionTax.Service
                 Amount = tollAmount
             };
             await _tollRepository.InsertAsync(toll);
+            _unitOfWork.Complete();
             return toll.Id;
         }
-        
+
 
     }
 }

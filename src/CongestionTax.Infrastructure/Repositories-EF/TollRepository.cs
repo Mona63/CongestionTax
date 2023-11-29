@@ -24,7 +24,6 @@ namespace CongestionTax.Infrastructure
         public async Task InsertAsync(Toll entity)
         {
             await _context.Tolls.AddAsync(entity);
-            _context.SaveChanges();
         }
 
         public Task UpdateAsync(Toll entity)

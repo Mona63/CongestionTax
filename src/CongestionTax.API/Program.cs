@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<CongestionTaxDbContext>(options =>
                                       options.UseSqlite(builder.Configuration.GetConnectionString("MainConnectionString")));
-builder.Services.AddScoped<ITollRepository, TollRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<ITollRepository, TollRepository>();
 builder.Services.AddScoped<ITravelService, TravelService>();
 builder.Services.AddScoped<IRuleEngine, RuleEngine>();
 builder.Services.AddScoped<IFreeChargeRule, DaysRule>();

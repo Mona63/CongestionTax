@@ -19,3 +19,6 @@
 /src/CongestionTax.Service/bin/Debug/net6.0
 /src/CongestionTax.Service/obj
 /src/obj
+/Backend Technical Test
+/src/CongestionTax.API/CongestionTax.sqlite
+/src/CongestionTax.API/CongestionTax.sqlite-shm
