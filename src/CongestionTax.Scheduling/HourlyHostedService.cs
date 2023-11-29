@@ -27,7 +27,7 @@ namespace CongestionTax.Scheduling
         private void DoWork(object? state)
         {
             var count = Interlocked.Increment(ref executionCount);
-            _hourlyMaxChargeRule.KeepJustMaxChargeInHourAsync(DateTime.Now.AddHours(-1));
+            _hourlyMaxChargeRule.ApplyHourlyMaxChargeRuleAsync(DateTime.Now.AddHours(-1));
 
             _logger.LogInformation(
                 "Timed Hosted Service is working. Count: {Count}", count);
