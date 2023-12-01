@@ -18,7 +18,7 @@ namespace CongestionTax.Test
         public void It_should_be_free_for_except_vehichle(VehicleType vehicleType)
         {
             // arrange
-            var travelToProcess = new TravelDto { VehicleType = vehicleType, ActionAt = DateTime.Now };
+            var travelToProcess = new TravelDto { TravelAt = DateTime.Now };
             var vehichleTypeRule = new VehichleTypeRule();
 
             // act
@@ -32,8 +32,8 @@ namespace CongestionTax.Test
         public void It_should_be_free_on_public_holidays(DateTime actionAt)
         {
             // arrange
-            var travelToProcess = new TravelDto { VehicleType = VehicleType.Others, ActionAt = actionAt };
-            var calendarRule = new DaysRule();
+            var travelToProcess = new TravelDto { TravelAt = actionAt };
+            var calendarRule = new DayFreeChargeRule();
 
             // act
             var calendarRuleApplicable = calendarRule.CanBeFreeCharge(travelToProcess);
@@ -46,7 +46,7 @@ namespace CongestionTax.Test
         public void It_should_be_free_on_specific_time(DateTime actionAt)
         {
             // arrange
-            var travelToProcess = new TravelDto { VehicleType = VehicleType.Others, ActionAt = actionAt };
+            var travelToProcess = new TravelDto {  TravelAt = actionAt };
             var timeRule = new TimeFreeChargeRule();
 
             // act

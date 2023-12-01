@@ -5,12 +5,15 @@ namespace CongestionTax.Infrastructure
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly CongestionTaxDbContext _context;
+        public ITravelRepository _travelRepository;
         public ITollRepository _tollRepository;
         public UnitOfWork(CongestionTaxDbContext context,
-                          ITollRepository tollRepository)
+                          ITollRepository tollRepository,
+                          ITravelRepository travelRepository)
         {
             _context = context;
             _tollRepository = tollRepository;
+            _travelRepository = travelRepository;
         }
 
         public void Complete()

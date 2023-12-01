@@ -5,13 +5,15 @@ namespace CongestionTax.Service
 {
     public class VehichleTypeRule : IFreeChargeRule
     {
-        public int Proiority { get; set; }
-       
-        public  bool CanBeFreeCharge(TravelDto travel)
+
+        public bool CanBeFreeCharge(TravelDto travel)
         {
-            var result = Enum.IsDefined(typeof(FreeChargeVehicleType), travel.VehicleType.ToString());
+
+            var result = true;
+                //!(travel.VehicleType == VehicleType.ShouldBeCharge);
+
             return result;
         }
-       
+
     }
 }

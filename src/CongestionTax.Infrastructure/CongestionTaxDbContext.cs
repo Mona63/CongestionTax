@@ -6,6 +6,7 @@ namespace CongestionTax.Infrastructure
     public class CongestionTaxDbContext : DbContext
     {
         public DbSet<Toll> Tolls { get; set; }
+        public DbSet<Travel> Travels { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
        
         public CongestionTaxDbContext()

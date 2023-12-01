@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations;
 namespace CongestionTax.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class TollController : ControllerBase
+    [Route("travels")]
+    public class TravelController : ControllerBase
     {
        
         private readonly ITravelService _travelService;
 
-        public TollController(ITravelService travelService)
+        public TravelController(ITravelService travelService)
         {
             _travelService = travelService;
         }
@@ -23,7 +23,7 @@ namespace CongestionTax.API.Controllers
         {
             try
             {
-                var result = await _travelService.RegisterTollAsync(travel);
+                var result = await _travelService.RegisterTravelAsync(travel);
             return Ok(result);
             }
             catch (ValidationException ex)

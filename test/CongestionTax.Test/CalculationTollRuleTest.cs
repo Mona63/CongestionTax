@@ -14,7 +14,7 @@ namespace CongestionTax.Test
         public void It_should_be_charge_according_time_table_charge(DateTime actionAt, decimal toll)
         {
             // arrange
-            var travelToProcess = new TravelDto { VehicleType = VehicleType.Others , ActionAt = actionAt };
+            var travelToProcess = new TravelDto {  TravelAt = actionAt };
             var timeTableChargeRule = new TimeTableChargeRule();
 
             // act

@@ -22,3 +22,5 @@
 /Backend Technical Test
 /src/CongestionTax.API/CongestionTax.sqlite
 /src/CongestionTax.API/CongestionTax.sqlite-shm
+/CongestionTax.API/obj
+/Project.Api/obj

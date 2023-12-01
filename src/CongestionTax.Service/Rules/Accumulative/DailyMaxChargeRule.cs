@@ -17,28 +17,28 @@ namespace CongestionTax.Service
         }
         public async Task ApplyDailyMaxChargeRuleAsync(DateTime dt)
         {
-            var dailyMaxyChargeAmount = _appSettings.Value.DailyMaxChargeAmount;
+            //var dailyMaxyChargeAmount = _appSettings.Value.DailyMaxChargeAmount;
 
-            var dailyMaxChargeRuleVehicleIds = _tollRepository
-                                                            .GetGrouped(e => e.VehicleId
-                                                                      , g => new { VehicleId = g.Key, Sum = g.Sum(t => t.Amount) }
-                                                                      , f => f.ActionAt.Day == dt.Day)
-                                                            .Where(r => r.Sum > dailyMaxyChargeAmount)
-                                                            .Select(c => c.VehicleId)
-                                                            .ToList();
+            //var dailyMaxChargeRuleVehicleIds = _tollRepository
+            //                                                .GetGrouped(e => e.VehicleId
+            //                                                          , g => new { VehicleId = g.Key, Sum = g.Sum(t => t.Amount) }
+            //                                                          , f => f.ActionAt.Day == dt.Day)
+            //                                                .Where(r => r.Sum > dailyMaxyChargeAmount)
+            //                                                .Select(c => c.VehicleId)
+            //                                                .ToList();
 
-            await _tollRepository.BulkUpdateAsync(v => dailyMaxChargeRuleVehicleIds.Contains(v.VehicleId) && v.ActionAt.Day == dt.Day
-                                                , c => c.Amount, c => 0);
+            //await _tollRepository.BulkUpdateAsync(v => dailyMaxChargeRuleVehicleIds.Contains(v.VehicleId) && v.ActionAt.Day == dt.Day
+            //                                    , c => c.Amount, c => 0);
 
-            var newChargetolls = dailyMaxChargeRuleVehicleIds.Select(t => new Toll()
-                                                                        {
-                                                                            ActionAt = dt.Date,
-                                                                            Amount = dailyMaxyChargeAmount,
-                                                                            VehicleId = t
-                                                                        }).ToList();
-            newChargetolls.ForEach(n => _tollRepository.InsertAsync(n));
+            //var newChargetolls = dailyMaxChargeRuleVehicleIds.Select(t => new Toll()
+            //                                                            {
+            //                                                                ActionAt = dt.Date,
+            //                                                                Amount = dailyMaxyChargeAmount,
+            //                                                                VehicleId = t
+            //                                                            }).ToList();
+            //newChargetolls.ForEach(n => _tollRepository.InsertAsync(n));
 
-            _unitOfWork.Complete();
+            //_unitOfWork.Complete();
 
         }
     }
