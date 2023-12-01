@@ -1,9 +1,6 @@
 ﻿using CongestionTax.Core;
-using CongestionTax.Core.Dtos;
 using CongestionTax.Core.Entities;
 using CongestionTax.Core.RuleEngine;
-using System.Data;
-using System.Text;
 
 namespace CongestionTax.Service
 {
@@ -13,7 +10,7 @@ namespace CongestionTax.Service
       
         public RuleEngine(IEnumerable<ICongestionTaxRule> rules)
         {
-            _rules = rules;
+            _rules = rules.OrderByDescending(r=>r.Priority);
         }
 
         public async Task<decimal> Run(Travel travel)
@@ -21,7 +18,6 @@ namespace CongestionTax.Service
            var result= new EvalutionResult(true, 0);
             foreach (var rule in _rules)
             {
-
                 result = await rule.Evaluate(travel, result);
                 if (!result.Continue)
                 {
@@ -29,8 +25,7 @@ namespace CongestionTax.Service
                 }
 
             }
-           return result.Amount;
-           
+           return result.Amount;   
         }
     }
 }

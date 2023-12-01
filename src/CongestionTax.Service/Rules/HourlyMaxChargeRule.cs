@@ -13,15 +13,18 @@ namespace CongestionTax.Service
             _tollRepository = tollRepository;
 
         }
+        int Priority => 4;
+
         public async Task<EvalutionResult> Evaluate(Travel travel, EvalutionResult lastEvalutionResult)
         {
             var countinueEvaluation = true;
             var amount = lastEvalutionResult.Amount;
-            var lastHourVehicleTolls = await _tollRepository.GetAllAsync(c => c.Travel.VehicleId == travel.VehicleId &&
+            var maxHourlyCharge = await _tollRepository.GetMaxAmount(c => c.Travel.VehicleId == travel.VehicleId &&
                                                                             c.Travel.TravelAt > travel.TravelAt.AddHours(-1) &&
                                                                             c.Travel.TravelAt < travel.TravelAt);
 
-            if (lastHourVehicleTolls.Max(t => t.Amount) >= lastEvalutionResult.Amount)
+
+            if (maxHourlyCharge >= lastEvalutionResult.Amount)
             {
                 countinueEvaluation = false;
                 amount = 0;

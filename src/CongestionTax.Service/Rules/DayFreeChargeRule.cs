@@ -6,6 +6,8 @@ namespace CongestionTax.Service
 {
     public class DayFreeChargeRule : ICongestionTaxRule
     {
+        int Priority => 1;
+
         public async Task<EvalutionResult> Evaluate(Travel travel, EvalutionResult lastEvalutionResult)
         {
             var continueEvalution = true;

@@ -19,23 +19,19 @@ namespace CongestionTax.Infrastructure
         }
         public async Task<IEnumerable<Toll>> GetAllAsync(Expression<Func<Toll, bool>> filter)
         {
-            var tolls = await _context.Tolls.Where(filter).ToListAsync();
-            return tolls;
+            return await _context.Tolls.Where(filter).ToListAsync();   
         }
-        public IEnumerable<TResult> GetGrouped<TKey, TResult>(Expression<Func<Toll, TKey>> groupingKey,
-                                                              Expression<Func<IGrouping<TKey, Toll>, TResult>> resultSelector,
-                                                              Expression<Func<Toll, bool>>? filter = null)
-
+        public  Task<decimal> GetTotalAmount(Expression<Func<Toll, bool>> filter)
         {
-            var query = _context.Tolls.AsQueryable();
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-            return query.GroupBy(groupingKey).Select(resultSelector);
+            return _context.Tolls.Where(filter).SumAsync(t => t.Amount);
+            
         }
+        public Task<decimal> GetMaxAmount(Expression<Func<Toll, bool>> filter)
+        {
+            return _context.Tolls.Where(filter).MaxAsync(t => t.Amount);
 
+        }
+        
     }
 
 }

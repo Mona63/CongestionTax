@@ -2,7 +2,6 @@ using CongestionTax.Core;
 using CongestionTax.Core.Service;
 using CongestionTax.Infrastructure;
 using CongestionTax.Service;
-using CongestionTax.Service.Rules;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

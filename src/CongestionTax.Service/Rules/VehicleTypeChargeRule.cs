@@ -7,18 +7,20 @@ namespace CongestionTax.Service
 {
     public class VehicleTypeChargeRule : ICongestionTaxRule
     {
-        public async Task<EvalutionResult> Evaluate(Travel travel, EvalutionResult lastEvalutionResult)
+        int Priority => 2;
+
+        public Task<EvalutionResult> Evaluate(Travel travel, EvalutionResult lastEvalutionResult)
         {
             var continueEvalution = true;
             var amount = lastEvalutionResult.Amount;
 
             if (!(travel.Vehicle.VehicleType == VehicleType.Personal))
             {
-                 continueEvalution = false;
-                 amount = 0m;
+                continueEvalution = false;
+                amount = 0m;
             }
-            
-            return new EvalutionResult(continueEvalution, amount);
+
+            return Task.FromResult(new EvalutionResult(continueEvalution, amount));
         }
     }
 }
