@@ -1,15 +1,15 @@
-﻿using CongestionTax.Service;
+﻿using CongestionTax.Service.Rules;
 
 namespace CongestionTax.Scheduling
 {
-    public class TimedHostedService : IHostedService, IDisposable
+    public class HourlyHostedService : IHostedService, IDisposable
     {
         private int executionCount = 0;
-        private readonly ILogger<TimedHostedService> _logger;
+        private readonly ILogger<HourlyHostedService> _logger;
         private Timer? _timer = null;
         private readonly HourlyMaxChargeRule _hourlyMaxChargeRule;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger)
+        public HourlyHostedService(ILogger<HourlyHostedService> logger)
         {
             _logger = logger;
         }
@@ -26,11 +26,18 @@ namespace CongestionTax.Scheduling
 
         private void DoWork(object? state)
         {
+            try
+            {
             var count = Interlocked.Increment(ref executionCount);
-            _hourlyMaxChargeRule.ApplyHourlyMaxChargeRuleAsync(DateTime.Now.AddHours(-1));
+            //_hourlyMaxChargeRule.ApplyHourlyMaxChargeRuleAsync(DateTime.Now.AddHours(-1));
 
             _logger.LogInformation(
                 "Timed Hosted Service is working. Count: {Count}", count);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
 
         public Task StopAsync(CancellationToken stoppingToken)

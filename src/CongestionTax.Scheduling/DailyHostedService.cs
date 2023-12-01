@@ -1,9 +1,4 @@
-﻿using CongestionTax.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CongestionTax.Service.Rules;
 
 namespace CongestionTax.Scheduling
 {
@@ -31,12 +26,19 @@ namespace CongestionTax.Scheduling
 
         private void DoWork(object? state)
         {
-            var count = Interlocked.Increment(ref executionCount);
+            try
+            {
+                var count = Interlocked.Increment(ref executionCount);
 
-            _hitDailyMaxChargeRule.ApplyDailyMaxChargeRuleAsync(DateTime.Now.AddDays(-1));
+               // _hitDailyMaxChargeRule.ApplyDailyMaxChargeRuleAsync(DateTime.Now.AddDays(-1));
 
-            _logger.LogInformation(
-                "Timed Hosted Service is working. Count: {Count}", count);
+                _logger.LogInformation(
+                    "Timed Hosted Service is working. Count: {Count}", count);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
 
         public Task StopAsync(CancellationToken stoppingToken)

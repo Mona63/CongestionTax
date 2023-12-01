@@ -1,9 +1,10 @@
 ﻿using CongestionTax.Core.Dtos;
+using CongestionTax.Core.Entities;
 
 namespace CongestionTax.Service
 {
     public interface IRuleEngine
     {
-        decimal GetTollAmount(TravelDto travel);
+        Task<decimal> Run(Travel travel);
     }
 }

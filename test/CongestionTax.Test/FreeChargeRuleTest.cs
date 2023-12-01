@@ -1,6 +1,7 @@
 using CongestionTax.Core;
 using CongestionTax.Core.Dtos;
 using CongestionTax.Core.Entities;
+using CongestionTax.Core.RuleEngine;
 using CongestionTax.Service;
 using FluentAssertions;
 
@@ -15,45 +16,33 @@ namespace CongestionTax.Test
         [TestCase(VehicleType.Foreign)]
         [TestCase(VehicleType.Tractor)]
         [TestCase(VehicleType.Military)]
-        public void It_should_be_free_for_except_vehichle(VehicleType vehicleType)
+        public async Task It_should_be_free_for_except_vehichle(VehicleType vehicleType)
         {
             // arrange
-            var travelToProcess = new TravelDto { TravelAt = DateTime.Now };
-            var vehichleTypeRule = new VehichleTypeRule();
+            var travelToProcess = new Travel {Vehicle=new Vehicle() { VehicleType = vehicleType }, TravelAt = DateTime.Now };
+            var vehichleTypeRule = new VehicleTypeChargeRule();
+            var evaluationResult = new EvalutionResult(true, 0);
 
             // act
-            var vehichleTypeRuleApplicable = vehichleTypeRule.CanBeFreeCharge(travelToProcess);
+            var actResult = await vehichleTypeRule.Evaluate(travelToProcess, evaluationResult);
 
             // assert
-            vehichleTypeRuleApplicable.Should().Be(true);
+            actResult.Amount.Should().Be(0);
         }
         [Test]
         [TestCaseSource(nameof(PublicHolidayTestDate), new object[] { 2013 })]
-        public void It_should_be_free_on_public_holidays(DateTime actionAt)
+        public async Task It_should_be_free_on_public_holidays(DateTime actionAt)
         {
             // arrange
-            var travelToProcess = new TravelDto { TravelAt = actionAt };
-            var calendarRule = new DayFreeChargeRule();
+            var travelToProcess = new Travel() { TravelAt = actionAt };
+            var dayFreeRule = new DayFreeChargeRule();
+            var evaluationResult = new EvalutionResult(true, 0);
 
             // act
-            var calendarRuleApplicable = calendarRule.CanBeFreeCharge(travelToProcess);
+            var actResult = await dayFreeRule.Evaluate(travelToProcess, evaluationResult);
 
             // assert
-            calendarRuleApplicable.Should().Be(true);
-        }
-        [Test]
-        [TestCaseSource(nameof(FreeChargeTimeTest))]
-        public void It_should_be_free_on_specific_time(DateTime actionAt)
-        {
-            // arrange
-            var travelToProcess = new TravelDto {  TravelAt = actionAt };
-            var timeRule = new TimeFreeChargeRule();
-
-            // act
-            var timeRuleApplicable = timeRule.CanBeFreeCharge(travelToProcess);
-
-            // assert
-            timeRuleApplicable.Should().Be(true);
+            actResult.Amount.Should().Be(0);
         }
        
         static IEnumerable<DateTime> PublicHolidayTestDate(int year)
@@ -67,16 +56,6 @@ namespace CongestionTax.Test
             yield return GothenburgPublicHoliday.Christmas(year);
           
         }
-        static IEnumerable<DateTime> FreeChargeTimeTest()
-        {
-            yield return new DateTime(2023, 12, 12, 18, 30, 0);
-            yield return new DateTime(2023, 12, 12, 20, 0, 0);
-            yield return new DateTime(2023, 12, 12, 22, 30, 0);
-            yield return new DateTime(2023, 12, 12, 23, 59, 0);
-            yield return new DateTime(2023, 12, 12, 1, 0, 0);
-            yield return new DateTime(2023, 12, 12, 3, 34, 0);
-            yield return new DateTime(2023, 12, 12, 5, 59, 0);
-
-        }
+       
     }
 }

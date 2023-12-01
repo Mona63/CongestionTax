@@ -24,3 +24,4 @@
 /src/CongestionTax.API/CongestionTax.sqlite-shm
 /CongestionTax.API/obj
 /Project.Api/obj
+/src/CongestionTax.API/CongestionTax.sqlite-wal

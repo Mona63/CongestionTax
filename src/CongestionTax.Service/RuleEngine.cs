@@ -1,32 +1,36 @@
 ﻿using CongestionTax.Core;
 using CongestionTax.Core.Dtos;
+using CongestionTax.Core.Entities;
+using CongestionTax.Core.RuleEngine;
 using System.Data;
+using System.Text;
 
 namespace CongestionTax.Service
 {
-    public class RuleEngine: IRuleEngine
+    public class RuleEngine : IRuleEngine
     {
-        readonly IEnumerable<IFreeChargeRule> _freeChargeRules;
-        readonly IEnumerable<ICaculationTollRule> _caculationTollRules;
-
-        public RuleEngine(IEnumerable<IFreeChargeRule?> freeChargeRules
-                         , IEnumerable<ICaculationTollRule?> caculationTollRules)
+        readonly IEnumerable<ICongestionTaxRule> _rules;
+      
+        public RuleEngine(IEnumerable<ICongestionTaxRule> rules)
         {
-            _freeChargeRules=freeChargeRules;
-            _caculationTollRules = caculationTollRules;
-        }   
+            _rules = rules;
+        }
 
-        public decimal GetTollAmount(TravelDto travel)
+        public async Task<decimal> Run(Travel travel)
         {
-            decimal toll = 0;
-            var freeChargeRule = _freeChargeRules.OrderBy(r => r.Proiority)
-                                                 .FirstOrDefault(r => r.CanBeFreeCharge(travel));
+           var result= new EvalutionResult(true, 0);
+            foreach (var rule in _rules)
+            {
 
-            if (freeChargeRule != null) { return 0; }
+                result = await rule.Evaluate(travel, result);
+                if (!result.Continue)
+                {
+                    break;
+                }
 
-            toll = _caculationTollRules.Aggregate(0m, (total, rule) => (rule.CalculationToll(travel)) + total);
+            }
+           return result.Amount;
            
-            return toll;
         }
     }
 }

@@ -1,5 +1,5 @@
-using CongestionTax.Core;
-using CongestionTax.Core.Dtos;
+using CongestionTax.Core.Entities;
+using CongestionTax.Core.RuleEngine;
 using CongestionTax.Service;
 using FluentAssertions;
 
@@ -7,21 +7,20 @@ namespace CongestionTax.Test
 {
     public class CalculationTollRuleTest
     {
-
-
         [Test]
         [TestCaseSource(nameof(TimeTableChargeTest))]
-        public void It_should_be_charge_according_time_table_charge(DateTime actionAt, decimal toll)
+        public async Task It_should_be_charge_according_time_table_charge(DateTime actionAt, decimal tollAmount)
         {
             // arrange
-            var travelToProcess = new TravelDto {  TravelAt = actionAt };
+            var travelToProcess = new Travel() {  TravelAt = actionAt };
             var timeTableChargeRule = new TimeTableChargeRule();
+            var evaluationResult = new EvalutionResult(true, 0);
 
             // act
-            var actToll = timeTableChargeRule.CalculationToll(travelToProcess);
+            var actResult =await timeTableChargeRule.Evaluate(travelToProcess, evaluationResult);
 
             // assert
-            actToll.Should().Be(toll);
+            actResult.Amount.Should().Be(tollAmount);
         }
         public static object[] TimeTableChargeTest =
         {
@@ -32,7 +31,9 @@ namespace CongestionTax.Test
             new object[] { new DateTime(2013, 1, 1, 8, 30, 0), 8m },
             new object[] { new DateTime(2013, 1, 1, 15, 0, 0), 13m },
             new object[] { new DateTime(2013, 1, 1, 15, 30, 0), 18m },
-
+            new object[] { new DateTime(2013, 1, 1, 19, 30, 0), 0m },
+            new object[] { new DateTime(2013, 1, 1, 4, 30, 0), 0m},
         };
     }
 }
+

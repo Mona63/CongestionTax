@@ -12,9 +12,9 @@ namespace CongestionTax.Test
         {
 
             var freeChargeRules = new List<IFreeChargeRule> {
-                                            new VehichleTypeRule {Proiority=1},
-                                            new DaysRule(){Proiority=2},
-                                            new TimeFreeChargeRule(){Proiority=3},
+                                            new VehicleTypeChargeRule(),
+                                            new DayFreeChargeRule(),
+                                            new TimeFreeChargeRule(),
             };
             var CalculationRules = new List<ICaculationTollRule> { 
                                           new TimeTableChargeRule()
