@@ -19,7 +19,7 @@ namespace CongestionTax.API.Controllers
 
         // POST: travels
         [HttpPost]
-        public async Task<IActionResult> Register(TravelDto travel)
+        public async Task<IActionResult> Register(TraveltoRegisterDto travel)
         {
             try
             {

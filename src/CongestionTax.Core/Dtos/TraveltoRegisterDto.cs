@@ -2,7 +2,7 @@
 
 namespace CongestionTax.Core.Dtos
 {
-    public class TravelDto
+    public class TraveltoRegisterDto
     {
         public int VehicleId { get;  set; }
         public DateTime TravelAt { get;  set; }

@@ -5,6 +5,6 @@ namespace CongestionTax.Core.Service
 {
     public interface ITravelService
     {
-        Task<int> RegisterTravelAsync(TravelDto travel);
+        Task<int> RegisterTravelAsync(TraveltoRegisterDto travel);
     }
 }
