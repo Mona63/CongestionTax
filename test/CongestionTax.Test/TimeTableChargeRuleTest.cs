@@ -5,7 +5,7 @@ using FluentAssertions;
 
 namespace CongestionTax.Test
 {
-    public class CalculationTollRuleTest
+    public class TimeTableChargeRuleTest
     {
         [Test]
         [TestCaseSource(nameof(TimeTableChargeTest))]
