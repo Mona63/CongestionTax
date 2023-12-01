@@ -15,19 +15,12 @@ namespace CongestionTax.Infrastructure
         public async Task InsertAsync(Toll entity)
         {
             await _context.Tolls.AddAsync(entity);
-
+            _context.SaveChanges();
         }
-
-        public Task UpdateAsync(Toll entity)
+        public async Task<IEnumerable<Toll>> GetAllAsync(Expression<Func<Toll, bool>> filter)
         {
-            throw new NotImplementedException();
-        }
-        public async Task BulkUpdateAsync(Expression<Func<Toll, bool>> filter,
-                                                     Func<Toll, object> property,
-                                                     Func<Toll, object> value)
-        {
-            await _context.Tolls.Where(filter).ExecuteUpdateAsync(setters => setters.SetProperty(property, value));
-
+            var tolls = await _context.Tolls.Where(filter).ToListAsync();
+            return tolls;
         }
         public IEnumerable<TResult> GetGrouped<TKey, TResult>(Expression<Func<Toll, TKey>> groupingKey,
                                                               Expression<Func<IGrouping<TKey, Toll>, TResult>> resultSelector,
@@ -42,16 +35,6 @@ namespace CongestionTax.Infrastructure
             }
             return query.GroupBy(groupingKey).Select(resultSelector);
         }
-        public async Task<List<Toll>> GetAllAsync(Expression<Func<Toll, bool>> filter)
-        {
-            var query = await _context.Tolls.Where(filter).ToListAsync();
-            return query;
-        }
-        public Task<Toll> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
 
     }
 

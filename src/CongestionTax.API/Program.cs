@@ -2,6 +2,7 @@ using CongestionTax.Core;
 using CongestionTax.Core.Service;
 using CongestionTax.Infrastructure;
 using CongestionTax.Service;
+using CongestionTax.Service.Rules;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,15 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<CongestionTaxDbContext>(options =>
                                       options.UseSqlite(builder.Configuration.GetConnectionString("MainConnectionString")));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddTransient<ITollRepository, TollRepository>();
 builder.Services.AddTransient<ITravelRepository, TravelRepository>();
 builder.Services.AddScoped<ITravelService, TravelService>();
 builder.Services.AddScoped<IRuleEngine, RuleEngine>();
-builder.Services.AddScoped<IFreeChargeRule, DayFreeChargeRule>();
-builder.Services.AddScoped<IFreeChargeRule, TimeFreeChargeRule>();
-builder.Services.AddScoped<IFreeChargeRule, VehichleTypeRule>();
-builder.Services.AddScoped<ICaculationTollRule, TimeTableChargeRule>();
+builder.Services.AddScoped<ICongestionTaxRule, DayFreeChargeRule>();
+builder.Services.AddScoped<ICongestionTaxRule, VehicleTypeChargeRule>();
+builder.Services.AddScoped<ICongestionTaxRule, TimeTableChargeRule>();
+builder.Services.AddScoped<ICongestionTaxRule, HourlyMaxChargeRule>();
+builder.Services.AddScoped<ICongestionTaxRule, DailyMaxChargeRule>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
